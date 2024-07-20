@@ -1,6 +1,6 @@
-import React, { useRef, useReducer } from "react";
+import React, { useRef, useReducer, useState } from "react";
 import { useAppDispatch } from "../store/store";
-import { addPerson } from "../store/features/personSlice";
+import { addPerson, fetchPerson } from "../store/features/personSlice";
 
 const Add = () => {
 	const name = useRef<string>("");
@@ -18,9 +18,20 @@ const Add = () => {
 			/>
 			<button
 				className="bg-violet-500  text-white rounded-md px-4 py-2 cursor-pointer hover:bg-violet-600 active:bg-violet-700"
-				onClick={() => dispatch(addPerson({ name: name.current }))}
+				onClick={() => {
+					dispatch(addPerson({ name: name.current }));
+				}}
 			>
 				Add
+			</button>
+			<br />
+			<button
+				className="bg-violet-500  text-white rounded-md px-4 py-2 cursor-pointer hover:bg-violet-600 active:bg-violet-700"
+				onClick={() => {
+					dispatch(fetchPerson());
+				}}
+			>
+				fetch
 			</button>
 			<div>{`${name.current}`}</div>
 		</form>
